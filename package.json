@@ -1,0 +1,24 @@
+{
+  "name": "typescript-rest-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santiagopegels/typescript-rest-example.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/santiagopegels/typescript-rest-example/issues"
+  },
+  "homepage": "https://github.com/santiagopegels/typescript-rest-example#readme",
+  "devDependencies": {
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.4"
+  }
+}
