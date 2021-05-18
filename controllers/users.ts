@@ -84,10 +84,30 @@ export const updateUser = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteUser = (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
-  res.json({
-    msg: "deleteUser",
-    id,
-  });
+
+  try {
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({
+        msg: "No existe un usuario con el id " + id,
+      });
+    }
+
+    await user.update({state: false})
+
+    res.json({
+      msg: "Usuario eliminado correctamente",
+      user
+    })
+
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      msg: "Ocurrió un error",
+    });
+  }
 };
