@@ -1,0 +1,19 @@
+version: '3.1'
+services:
+  mysql:
+        image: 'mysql:5.7'
+        container_name: ${DB_HOST}
+        volumes:
+          - ${DB_VOLUMEN}:/var/lib/mysql
+        environment:
+          - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+          - MYSQL_DATABASE=${DB_DATABASE}
+          - MYSQL_USER=${DB_USERNAME}
+          - MYSQL_PASSWORD=${DB_PASSWORD}
+        ports:
+          - ${DB_PORT}:3306
+        logging:
+              driver: "json-file"
+              options:
+                max-size: "200k"
+                max-file: "10"

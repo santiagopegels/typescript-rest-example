@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import userRoute from "../routes/user";
 import cors from "cors";
+import db from "../db/connection";
 
 class Server {
   private app: Application;
@@ -13,9 +14,12 @@ class Server {
     this.app = express();
     this.port = process.env.PORT || "8000";
 
+    //DB Connection
+    this.dbConnection();
+
     //Definir middlewares
-    this.middlewares()
-    
+    this.middlewares();
+
     //Definir rutas
     this.routes();
   }
@@ -27,13 +31,23 @@ class Server {
   middlewares() {
     //CORS
     this.app.use(cors());
-    
+
     //Body parser
-    this.app.use( express.json() )
+    this.app.use(express.json());
 
     //public folder
-    this.app.use( express.static('public'))
-}
+    this.app.use(express.static("public"));
+  }
+
+  async dbConnection() {
+    try {
+      await db.authenticate()
+      console.log('Base de datos ok');
+      
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 
   listen() {
     this.app.listen(this.port, () => {
